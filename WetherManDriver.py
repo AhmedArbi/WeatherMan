@@ -6,6 +6,9 @@ from datetime import date
 import os.path
 from Weather import Weather
 
+# This function take name of file actually that is data of a month.
+# Return list of the weather object of this particular month
+
 def read_data_of_a_month(name):
     days = []
 
@@ -34,6 +37,17 @@ def read_data_of_a_month(name):
 
     return days
 
+
+# This function is to display Highest tmperature, Lowest Temperature
+# and most humid day with humidity against some given year (Task 1)
+
+def display_high_temper_low_temper_most_humidity(year):
+    global data     # make use of the data we had prepared in our main section
+    global months   # make use of the months list we we had prepared in our main section
+    givenYearData = data[year]
+
+
+
 # Main function is starting from here.
 
 
@@ -47,4 +61,4 @@ months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 
 data = {year: {month : read_data_of_a_month('lahore_weather_'+repr(year)+'_'+month) for month in months} for year in range(1996,2012)}
 
 print (data[1997]['Jan'][0])
-
+display_high_temper_low_temper_most_humidity(1997)
