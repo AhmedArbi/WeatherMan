@@ -9,6 +9,7 @@ from datetime import date
 from statistics import mean
 import os.path
 from termcolor import colored, cprint
+
 from Weather import Weather
 
 # This function take name of file actually that is data of a month.
@@ -125,17 +126,24 @@ months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 
 # there is a list of weather objects of that particular month
 data = {year: {month : read_data_of_a_month('lahore_weather_'+repr(year)+'_'+month) for month in months} for year in range(1996,2012)}
 
-print (data[1997]['Jan'][0])
+
 
 print('\nTask 1:')
-display_high_temper_low_temper_most_humidity(2002)
+year = input("Please Enter Year: ")
+display_high_temper_low_temper_most_humidity(int(year))
 
 print('\nTask 2:')
-display_averages_of_given_month(2005,6)
+year = input("Please Enter Year: ")
+month = input("Please Enter Month (1,2,3): ")
+display_averages_of_given_month(int(year), int(month))
 
 print('\nTask 3:')
-draw_two_bar_charts_for_given_month(2005,6)
+year = input("Please Enter Year: ")
+month = input("Please Enter Month (1,2,3): ")
+draw_two_bar_charts_for_given_month(int(year), int(month))
 
 print('\nBONUS:')
-draw_one_bar_chart_for_given_month(2005,6)
+year = input("Please Enter Year: ")
+month = input("Please Enter Month (1,2,3): ")
+draw_one_bar_chart_for_given_month(int(year),int(month))
 
