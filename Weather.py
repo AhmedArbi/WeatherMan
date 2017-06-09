@@ -3,7 +3,7 @@ This class is to store weather data.
 it contains all variables that are in weather file are data members here.
 """
 
-import datetime
+
 
 class Weather:
 

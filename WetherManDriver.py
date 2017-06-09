@@ -1,11 +1,14 @@
 """
-
+This file include 5 functions and a main portion. In main portion data
+is readed from files and saved in a dictionary. And the in 5 functions
+1st is to read data against each month and other 4 areone for each task
+ including bonus task
 """
 
 from datetime import date
 from statistics import mean
 import os.path
-from termcolor import colored
+from termcolor import colored, cprint
 from Weather import Weather
 
 # This function take name of file actually that is data of a month.
@@ -83,21 +86,56 @@ def display_averages_of_given_month(year,month):
     print('Humid: {0}%'.format(mean(hum)))
 
 
+# This function is to  draw two horizontal bar charts on the
+# console for the highest and lowest temperature on each day.
+#  Highest in red and lowest in blue  For a given month(Task 3)
+def draw_two_bar_charts_for_given_month(year,month):
+    global data  # make use of the data we had prepared in our main section
+    global months  # make use of the months list we we had prepared in our main section
+    data_of_given_month = data[year][ months[month - 1]]  # month - 1, because user will give numeric input and key in dictionary is like 'Jan'
+
+    for this_day in data_of_given_month:
+        minTbar = colored('+' * int(this_day.minTemperature), 'blue')
+        maxTbar = colored('+' * int(this_day.maxTemperature), 'red')
+        print(str(this_day.date.day) + ':' +  maxTbar + '{0}C'.format(this_day.minTemperature))
+        print(str(this_day.date.day) + ':' + minTbar + '{0}C'.format(this_day.minTemperature))
+
+
+# This functio is to draw one horizontal bar chart on the
+# console for the highest and lowest temperature on each day.
+# Highest in red and lowest in blue  BONUS TASK
+def draw_one_bar_chart_for_given_month(year,month):
+    global data  # make use of the data we had prepared in our main section
+    global months  # make use of the months list we we had prepared in our main section
+    data_of_given_month = data[year][
+        months[month - 1]]  # month - 1, because user will give numeric input and key in dictionary is like 'Jan'
+
+    for this_day in data_of_given_month:
+        minTbar = colored('+' * int(this_day.minTemperature), 'blue')
+        maxTbar = colored('+' * int(this_day.maxTemperature),'red')
+        print (str(this_day.date.day) + ':' + minTbar+maxTbar+'{0}C-{1}C'.format(this_day.minTemperature, this_day.maxTemperature))
 
 
 
 # Main function is starting from here.
-
-
-
 months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 # building a dictionary with year as key and each value against key is
 # again a dictionary with month name as key. and in against month key
-# there is a list of weather objects
-
+# there is a list of weather objects of that particular month
 data = {year: {month : read_data_of_a_month('lahore_weather_'+repr(year)+'_'+month) for month in months} for year in range(1996,2012)}
 
 print (data[1997]['Jan'][0])
+
+print('\nTask 1:')
 display_high_temper_low_temper_most_humidity(2002)
+
+print('\nTask 2:')
 display_averages_of_given_month(2005,6)
+
+print('\nTask 3:')
+draw_two_bar_charts_for_given_month(2005,6)
+
+print('\nBONUS:')
+draw_one_bar_chart_for_given_month(2005,6)
+
