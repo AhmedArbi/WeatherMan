@@ -3,7 +3,9 @@
 """
 
 from datetime import date
+from statistics import mean
 import os.path
+from termcolor import colored
 from Weather import Weather
 
 # This function take name of file actually that is data of a month.
@@ -40,11 +42,47 @@ def read_data_of_a_month(name):
 
 # This function is to display Highest tmperature, Lowest Temperature
 # and most humid day with humidity against some given year (Task 1)
-
 def display_high_temper_low_temper_most_humidity(year):
+
     global data     # make use of the data we had prepared in our main section
     global months   # make use of the months list we we had prepared in our main section
-    givenYearData = data[year]
+    given_year_data = data[year]
+
+    # initialize each with 1st day of the year
+    max_temp_day, min_temp_day, max_humid_day = data[year]['Jan'][0], data[year]['Jan'][0], data[year]['Jan'][0]
+
+    for m in months:
+        for this_day in given_year_data[m]:
+            if max_temp_day.maxTemperature < this_day.maxTemperature:
+                max_temp_day = this_day
+
+            if this_day.minTemperature and min_temp_day.minTemperature > this_day.minTemperature:
+                min_temp_day = this_day
+
+            if max_humid_day.maxHumadity < this_day.maxHumadity:
+                max_humid_day = this_day
+
+    print (date.strftime( max_temp_day.date, '%B %d'))
+    print ('Highest: {0}C on {1}'.format(max_temp_day.maxTemperature, date.strftime( max_temp_day.date, '%B %d')))
+    print ('Lowest: {0}C on {1}'.format(min_temp_day.minTemperature, date.strftime( min_temp_day.date, '%B %d')))
+    print ('Humid: {0}% on {1}'.format(max_humid_day.maxHumadity,  date.strftime( max_humid_day.date, '%B %d')))
+
+
+
+# This function is to print hightest average lowest average temperatures and average humadity
+def display_averages_of_given_month(year,month):
+    global data  # make use of the data we had prepared in our main section
+    global months  # make use of the months list we we had prepared in our main section
+    data_of_given_month = data[year][months[month-1]] # month - 1, because user will give numeric input and key in dictionary is like 'Jan'
+    h_temps = [int(hT.maxTemperature) for hT in data_of_given_month]
+    l_temps = [int(lT.minTemperature) for lT in data_of_given_month]
+    hum = [int(hm.maxHumadity) for hm in data_of_given_month]
+
+    print('Highest Average: {0}C '.format(mean(h_temps)))
+    print('Lowest: {0}C'.format(mean(l_temps)))
+    print('Humid: {0}%'.format(mean(hum)))
+
+
 
 
 
@@ -61,4 +99,5 @@ months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 
 data = {year: {month : read_data_of_a_month('lahore_weather_'+repr(year)+'_'+month) for month in months} for year in range(1996,2012)}
 
 print (data[1997]['Jan'][0])
-display_high_temper_low_temper_most_humidity(1997)
+display_high_temper_low_temper_most_humidity(2002)
+display_averages_of_given_month(2005,6)
