@@ -132,6 +132,9 @@ print('\nTask 1:')
 year = input("Please Enter Year: ")
 display_high_temper_low_temper_most_humidity(int(year))
 
+
+
+
 print('\nTask 2:')
 year = input("Please Enter Year: ")
 month = input("Please Enter Month (1,2,3): ")
