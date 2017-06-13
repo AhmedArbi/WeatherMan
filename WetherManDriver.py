@@ -22,7 +22,7 @@ class WeatherManDriver:
             with open(sys.argv[3] + '/' + name + '.txt', 'r') as f:
                 reader = csv.reader(f)
                 for i, line in enumerate(reader):
-                    if i>1 and line[0] != '<!-- 0.190:0 -->':
+                    if i>1 and line[0][0] != '<':
                         date_string = line[0]
                         date_in_list_form = date_string.split('-')
                         date_obj = date(year=int(date_in_list_form[0]), month=int(date_in_list_form[1]), day=int(date_in_list_form[2]))
