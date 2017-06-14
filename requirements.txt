@@ -1,0 +1,3 @@
+Following modules must be installed
+-> termcolor  (> pip install termcolor)
+-> statistics (> pip install statistics)
