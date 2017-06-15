@@ -4,10 +4,10 @@ it contains all variables that are in weather file are data members here.
 """
 
 
-
 class Weather:
 
-    def __init__(self, d, maxT, meanT, minT, dewPoint, meanD, minD, maxH, meanH, minH):
+    def __init__(self, d, maxT, meanT, minT, dewPoint,
+                 meanD, minD, maxH, meanH, minH):
         self.date = d
         self.maxTemperature = maxT
         self.meanTemperature = meanT
@@ -18,4 +18,3 @@ class Weather:
         self.maxHumadity = maxH
         self.meanHumadity = meanH
         self.minHumadity = minH
-
